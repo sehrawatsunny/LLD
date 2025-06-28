@@ -37,6 +37,10 @@ public class Main {
 
         File file = new File("photo.jpg","Image content");
         fileSharingService.sendFile(alice,bob,file);
+
+        File file2 = new File("document.pdf","PDF content");
+        fileSharingService.sendFile(bob,alice,file2);
+
     }
 }
 

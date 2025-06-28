@@ -36,15 +36,15 @@ public class User {
     }
 
     public void follow(User other) {
-// Need to follow other user.
+        // Need to follow other user.
         if (other == null || other == this) {
-// don't want to follow if same user.
+            // don't want to follow if same user.
             return;
         }
-// Follow other user.
+        // Follow other user.
         following.add(other);
 
-// Update yourself in the list of followers of other user.
+        // Update yourself in the list of followers of other user.
         other.followers.add(this);
     }
 
@@ -52,18 +52,18 @@ public class User {
         if (other == null) {
             return;
         }
-// UnFollow other user.
+        // UnFollow other user.
         following.remove(other);
 
-// Remove yourself in the list of followers of other user.
+        // Remove yourself in the list of followers of other user.
         other.followers.remove(this);
     }
 
     public Set<User> getFollowers() {
-//        Return an unmodifiable copy or read-only view:
+        // Return an unmodifiable copy or read-only view:
         return Collections.unmodifiableSet(this.followers);
-//        It returns the actual reference to the internal followers set.
-//        return this.followers;
+        // It returns the actual reference to the internal followers set.
+        // return this.followers;
     }
 
     public Set<User> getFollowing() {
