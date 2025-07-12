@@ -44,11 +44,11 @@ public class InMemoryRateLimitStore implements IRateLimitStore {
 //        if (existingWindow == null || existingWindow.start != currentWindowStartTime) {
 //            // New window: reset count to 1
 //            existingWindow = new Window(currentWindowStartTime);
-//            existingWindow.count = 1;
 //            store.put(key, existingWindow);
 //        } else {
 //            // Same window: increment
 //            existingWindow.count++;
+//            store.put(key, existingWindow);
 //        }
     }
     private static class Window {

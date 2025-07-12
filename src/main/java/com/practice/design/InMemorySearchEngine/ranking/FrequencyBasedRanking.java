@@ -30,7 +30,7 @@ public class FrequencyBasedRanking implements IRankingStrategy {
 //        sortTermsList.sort((a, b) -> Integer.compare(b.freqOfTerm, a.freqOfTerm));
 
         // Sort documents in descending order of frequency
-        Collections.sort(sortTermsList, (a, b) -> b.freqOfTerm - a.freqOfTerm);
+        sortTermsList.sort((a, b) -> b.freqOfTerm - a.freqOfTerm);
 
         // Collect document IDs
         List<Integer> rankedDocIds = new ArrayList<>();
@@ -40,17 +40,18 @@ public class FrequencyBasedRanking implements IRankingStrategy {
 
         return rankedDocIds;
     }
-}
 
-/**
- * Helper class for storing document ID and frequency of the term for sorting.
- */
-class SortTerms {
-    int docId;
-    int freqOfTerm;
+    /**
+     * Helper class for storing document ID and frequency of the term for sorting.
+     */
+    private class SortTerms {
+        int docId;
+        int freqOfTerm;
 
-    public SortTerms(int docId, int freqOfTerm) {
-        this.docId = docId;
-        this.freqOfTerm = freqOfTerm;
+        public SortTerms(int docId, int freqOfTerm) {
+            this.docId = docId;
+            this.freqOfTerm = freqOfTerm;
+        }
     }
 }
+

@@ -26,21 +26,15 @@ public class SearchEngineDemo {
         List<String> results = engine.search("tech-blog", "apple");
 
         System.out.println("Search results for keyword 'apple': " + results.size());
-        for (String doc : results) {
-            System.out.println(doc);
-        }
+        results.forEach(System.out::println);
 
         // Since , we have ignored is , in the tokenization , no results in the output.
         results = engine.search("tech-blog", "is");
         System.out.println("Search results for keyword 'is': " + results.size());
-        for (String doc : results) {
-            System.out.println(doc);
-        }
+        results.forEach(System.out::println);
 
         results = engine.search("tech-blog", "sweet");
         System.out.println("Search results for keyword 'sweet': " + results.size());
-        for (String doc : results) {
-            System.out.println(doc);
-        }
+        results.forEach(System.out::println);
     }
 }

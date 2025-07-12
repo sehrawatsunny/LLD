@@ -63,7 +63,8 @@ public class Topic {
         this.deliveryExecutor = new ThreadPoolExecutor(
                 5,                    // core threads
                 10,                   // max threads
-                60, TimeUnit.SECONDS,// idle timeout
+                60, // keep-alive time
+                TimeUnit.SECONDS,// idle timeout
                 new LinkedBlockingQueue<>(50), // Bounded task queue
                 new ThreadPoolExecutor.CallerRunsPolicy() // If full, run in caller's thread (throttles producer)
         );

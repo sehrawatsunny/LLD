@@ -1,7 +1,10 @@
 package com.practice.design.QueueKafka.core;
 
 
+import lombok.Data;
+
 // Represents a message to be sent by a producer and consumed by a consumer
+@Data
 public class Message {
     private final String id;
     private final String payload;
@@ -13,21 +16,5 @@ public class Message {
         this.payload = payload;
         this.producerId = producerId;
         this.timestamp = System.currentTimeMillis();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getPayload() {
-        return payload;
-    }
-
-    public String getProducerId() {
-        return producerId;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
     }
 }

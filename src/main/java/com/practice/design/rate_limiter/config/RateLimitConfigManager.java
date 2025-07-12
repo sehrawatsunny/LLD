@@ -27,6 +27,8 @@ public class RateLimitConfigManager {
      */
     public RateLimitConfig getRateLimitConfig(RateLimitRequest request, RateLimitConfig defaultConfig) {
         String key = request.getUserId() + ":" + request.getApiId();
+        // If we have set config for that user, return it
+        // else , return default config.
         return configMap.getOrDefault(key, defaultConfig);
     }
 }

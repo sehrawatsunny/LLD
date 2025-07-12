@@ -4,6 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 // Singleton class.
 // Store the type of each attribute key.
+@SuppressWarnings("LombokGetterMayBeUsed")
 public class TypeRegistry {
     private static final TypeRegistry instance = new TypeRegistry();
     // Concurrent hashmap to store attribute key and the type of value , as

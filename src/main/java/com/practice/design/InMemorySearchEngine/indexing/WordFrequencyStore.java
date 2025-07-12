@@ -22,7 +22,7 @@ public class WordFrequencyStore {
      * @param tokenizedWords list of words extracted from the document
      */
     public void addFrequencies(int docId , List<String> tokenizedWords){
-        // Map<String, Integer> freqWordInDoc = frequencies.computeIfAbsent(docId, k -> new HashMap<>());
+        // Map<String, Integer> freqWordInDoc = frequencyMap.computeIfAbsent(docId, k -> new HashMap<>());
         frequencyMap.putIfAbsent(docId,new HashMap<>());
         Map<String,Integer> freqWordInDoc = frequencyMap.get(docId);
 
