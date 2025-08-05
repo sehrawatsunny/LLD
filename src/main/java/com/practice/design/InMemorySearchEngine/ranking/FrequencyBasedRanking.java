@@ -26,9 +26,6 @@ public class FrequencyBasedRanking implements IRankingStrategy {
             sortTermsList.add(new SortTerms(docId, freq));
         }
 
-//        // Sort using lambda
-//        sortTermsList.sort((a, b) -> Integer.compare(b.freqOfTerm, a.freqOfTerm));
-
         // Sort documents in descending order of frequency
         sortTermsList.sort((a, b) -> b.freqOfTerm - a.freqOfTerm);
 

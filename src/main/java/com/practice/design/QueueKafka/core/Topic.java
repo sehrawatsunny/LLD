@@ -28,10 +28,7 @@ import java.util.concurrent.*;
  * - Subscriber list is thread-safe using CopyOnWriteArrayList.
  * - Message queue is thread-safe using LinkedBlockingQueue.
  */
-
-
 // Introducing backpressure to slowdown write to consumers.
-
 public class Topic {
     private final String name;
 
@@ -39,7 +36,6 @@ public class Topic {
     private final List<Consumer> subscribers = new CopyOnWriteArrayList<>();
 
     // Thread-safe queue to hold messages until they are dispatched
-//    private final BlockingQueue<Message> messageQueue = new LinkedBlockingQueue<>();
     // Bounded queue to enforce backpressure — max 100 messages
     private final BlockingQueue<Message> messageQueue = new LinkedBlockingQueue<>(100);
 
@@ -52,11 +48,8 @@ public class Topic {
      */
     public Topic(String name) {
         this.name = name;
-
         // Start a background thread that handles message dispatching to consumers
         new Thread(this::dispatchMessages).start();
-
-
         // Thread pool with fixed size of 10 threads for consumer delivery
         // this.deliveryExecutor = Executors.newFixedThreadPool(10);
         // ThreadPool with fixed 10 threads, and bounded queue of 50 tasks
@@ -86,9 +79,6 @@ public class Topic {
      *
      * @param message the message to be delivered
      */
-//    public void publish(Message message) {
-//        messageQueue.offer(message); // Non-blocking enqueue
-//    }
     // This method blocks if queue is full, adding natural backpressure on producers
     public void publish(Message message) {
         try {

@@ -30,11 +30,6 @@ public class FileSharingService {
         this.storage = storage;
     }
 
-//    public void sendFile(User sender , User receiver , File file){
-//        //Delegates actual file storage to IStorage
-//        storage.saveFile(sender,receiver,file);
-//    }
-
     // To Support Listeners and sending notification through observer pattern.
     // Multiple notifications needs to be sent , such as email and UI notification
 //    This listeners list stores all the subscribed observers (i.e., notification channels like Email, UI, SMS, etc.).

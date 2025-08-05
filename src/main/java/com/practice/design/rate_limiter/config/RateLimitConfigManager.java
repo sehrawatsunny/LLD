@@ -1,7 +1,6 @@
 package com.practice.design.rate_limiter.config;
 
 import com.practice.design.rate_limiter.model.RateLimitRequest;
-
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

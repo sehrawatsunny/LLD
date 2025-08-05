@@ -16,7 +16,6 @@ public class InMemoryStorage implements IStorage {
     // As it will create a new Map for every instance of the class.
     private final Map<String, List<File>> receivedFiles = new HashMap<>();
 
-
     @Override
     public void saveFile(User sender, User receiver, File file) {
         // Save the file to the map with id as receiver id.
@@ -29,7 +28,7 @@ public class InMemoryStorage implements IStorage {
                 " to " + receiver.getName());
     }
 
-    public List<File> getFilesForUser(User user){
-        return receivedFiles.getOrDefault(user.getUserId(),List.of());
+    public List<File> getFilesForUser(User user) {
+        return receivedFiles.getOrDefault(user.getUserId(), List.of());
     }
 }
