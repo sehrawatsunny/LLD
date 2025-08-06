@@ -1,5 +1,4 @@
 package com.practice.design.AdvertisementEngine.model;
-// User.java
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -55,6 +54,6 @@ public class User {
 
     public int getAge() {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        return currentYear - (dateOfBirth / 10000);
+        return currentYear - (dateOfBirth / 10000); // ex dob = 19991004
     }
 }

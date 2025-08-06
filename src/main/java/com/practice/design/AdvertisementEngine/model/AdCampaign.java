@@ -66,9 +66,13 @@ public class AdCampaign {
         servedTimestamps.add(Instant.now());
     }
 
+    // Rate limiting mechanism to ensure Advertisement isn't served more than 5 times per minute globally
     public synchronized boolean canServeNow() {
         Instant oneMinuteAgo = Instant.now().minusSeconds(60);
+        //removes all timestamps older than one minute
         servedTimestamps.removeIf(timestamp -> timestamp.isBefore(oneMinuteAgo));
+
+        //Returns `true` if another ad can be served
         return servedTimestamps.size() < 5;
     }
 }

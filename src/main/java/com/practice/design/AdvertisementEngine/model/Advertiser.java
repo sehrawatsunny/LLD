@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 public class Advertiser {
     private final String advertiserId;
     private final String name;
+    //BigDecimal avoids rounding errors and loss of precision
     private final AtomicReference<BigDecimal> budget;
 
     public Advertiser(String advertiserId, String name) {
