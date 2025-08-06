@@ -35,33 +35,28 @@ public class MatchingServiceImpl implements MatchingService {
         // Filter eligible campaigns using strategy
         List<AdCampaign> eligibleCampaigns = matchingStrategy.filterCandidates(allCampaigns, user, city);
 
-        // Filter by budget availability
-        List<AdCampaign> budgetFilteredCampaigns = eligibleCampaigns.stream()
-                .filter(campaign -> {
-                    Advertiser advertiser = advertiserService.getAdvertiser(campaign.getAdvertiserId());
-                    return advertiser.hasSufficientBudget(campaign.getBidAmount());
-                })
+        // Sort by bid amount first
+        // If the bid amount is higher, there are more chances of serving that campaign.
+        List<AdCampaign> sortedCampaigns = eligibleCampaigns.stream()
                 .sorted(Comparator.comparingDouble(AdCampaign::getBidAmount).reversed())
                 .collect(java.util.stream.Collectors.toList());
 
-        if (budgetFilteredCampaigns.isEmpty()) {
-            return null;
+        // Try campaigns in decreasing order of bidAmount, until one found.
+        // i.e., Select the highest bidding campaign
+        for (AdCampaign campaign : sortedCampaigns) {
+            Advertiser advertiser = advertiserService.getAdvertiser(campaign.getAdvertiserId());
+
+            // Try to deduct budget
+            // Atomically deduct the budget if possible and return success
+            if (advertiser.deductBudget(campaign.getBidAmount())) {
+                // To record campaign serving globally.
+                campaign.recordServing();
+                // To record a user's past 10 campaigns.
+                user.addViewedAd(campaign.getCampaignId());
+                return campaign;
+            }
         }
-
-        // Select highest bidding campaign
-        AdCampaign selectedCampaign = budgetFilteredCampaigns.get(0);
-
-        // Process the serving
-        Advertiser advertiser = advertiserService.getAdvertiser(selectedCampaign.getAdvertiserId());
-        if (!advertiser.deductBudget(selectedCampaign.getBidAmount())) {
-            throw new InsufficientBudgetException(advertiser.getAdvertiserId(),
-                    selectedCampaign.getBidAmount(), advertiser.getBudget());
-        }
-
-        selectedCampaign.recordServing();
-        user.addViewedAd(selectedCampaign.getCampaignId());
-
-        return selectedCampaign;
+        return null;
     }
 }
 
